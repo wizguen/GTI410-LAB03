@@ -208,17 +208,17 @@ public class FilterKernelPanel extends JPanel implements ObserverIF {
 			break;
 			case 7: // Sobel Horiz 
 			{
-				float meanKernel[][] = {{7, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{-1.f, 0.f, 1.f},
+										{-2.f, 0.f, 2.f},
+										{-1.f, 0.f, 1.f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
 			case 8: // Sobel Vert
 			{
-				float meanKernel[][] = {{8, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{-1.f, -2.f, -1.f},
+										{0.f, 0.f, 0.f},
+										{1.f, 2.f, 1.f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
