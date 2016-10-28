@@ -160,17 +160,17 @@ public class FilterKernelPanel extends JPanel implements ObserverIF {
 		switch (index) {
 			case 1: // Mean filter
 			{
-				float meanKernel[][] = {{1, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{0.11f, 0.11f, 0.11f},
+										{0.11f, 0.11f, 0.11f},
+										{0.11f, 0.11f, 0.11f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
 			case 2: // Gaussian filter
 			{
-				float meanKernel[][] = {{2, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{1/16.f, 2/16.f, 1/16.f},
+										{2/16.f, 4/16.f, 2/16.f},
+										{1/16.f, 2/16.f, 1/16.f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
