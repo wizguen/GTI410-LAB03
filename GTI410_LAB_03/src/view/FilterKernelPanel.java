@@ -32,8 +32,8 @@ import controller.TransformersIndex;
 /**
  * <p>Title: FilterKernelPanel</p>
  * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2003 Sébastien Bois, Eric Paquette</p>
- * <p>Company: (ÉTS) - École de Technologie Supérieure</p>
+ * <p>Copyright: Copyright (c) 2003 Sï¿½bastien Bois, Eric Paquette</p>
+ * <p>Company: (ï¿½TS) - ï¿½cole de Technologie Supï¿½rieure</p>
  * @author unascribed
  * @version $Revision: 1.8 $
  */
@@ -176,17 +176,17 @@ public class FilterKernelPanel extends JPanel implements ObserverIF {
 			break;
 			case 3: // 4-Neighbour Laplacian
 			{
-				float meanKernel[][] = {{3, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{0.f, 1.f, 0.f},
+										{1.f, -4.f, 1.f},
+										{0.f, 1.f, 0.f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
 			case 4: // 8-Neighbour Laplacian
 			{
-				float meanKernel[][] = {{4, 2, 3},
-										{4, 5, 6},
-										{7, 8, 9}};
+				float meanKernel[][] = {{1.f, 1.f, 1.f},
+										{1.f, -8.f, 1.f},
+										{1.f, 1.f, 1.f}};
 				_kernelPanel.setKernelValues(meanKernel);
 			} 
 			break;
