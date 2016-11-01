@@ -79,8 +79,32 @@ public class FilteringTransformer extends AbstractTransformer{
 	/**
 	 * @param string
 	 */
-	public void setBorder(String string) {
-		System.out.println(string);
+	public void setBorder(String string) 
+	{
+		System.out.println("--------------------------------------------");
+		System.out.println("Bordure choisi   " + string);
+		System.out.println("--------------------------------------------");
+		
+		//http://xphilipp.developpez.com/articles/filtres/?page=page_3
+		
+		switch (string)
+		{
+		case "0" :
+			filter.setPaddingStrategy(new PaddingZeroStrategy() );
+			System.out.println("STRATEGIE MISE À ZERO");
+			break;
+		case "Circular":
+			filter.setPaddingStrategy(new PaddingCircularStrategy() );
+			System.out.println("STRATEGIE CIRCULAIRE");
+			break;
+		case "Mirror":
+			System.out.println("STRATEGIE "+ string + " non implémentée");
+			break;
+		case "Copy":
+			System.out.println("STRATEGIE "+ string + " non implémentée");
+			break;
+		}
+		
 	}
 
 	/**
