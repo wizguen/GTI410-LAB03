@@ -7,6 +7,7 @@ import model.PixelDouble;
 
 public class PaddingCircularStrategy extends PaddingStrategy{
 	
+	//http://xphilipp.developpez.com/articles/filtres/?page=page_3
 	// Image[-1][y]= Image[Largeur-1][y]   circulaire
 	public Pixel pixelAt(ImageX img, int x, int y) 
 	{

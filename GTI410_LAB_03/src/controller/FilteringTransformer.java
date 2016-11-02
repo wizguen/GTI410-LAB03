@@ -112,5 +112,14 @@ public class FilteringTransformer extends AbstractTransformer{
 	 */
 	public void setClamp(String string) {
 		System.out.println(string);
+		switch (string) {
+		case "Clamp 0...255":
+			filter.setImageConversionStrategy(new ImageClampStrategy());
+			break;
+		case "Abs and normalize to 255":
+			filter.setImageConversionStrategy(new ImageNormAbStrategy());
+			System.out.println("STRATEGIE VALEUR ABSOLU");
+			break;
+		}
 	}
 }
