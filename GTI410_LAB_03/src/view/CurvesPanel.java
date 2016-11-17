@@ -195,6 +195,8 @@ public class CurvesPanel extends JPanel implements DocObserver {
 		return (String)curvesComboBox.getSelectedItem();
 	}
 	
+	//---------------------------------------------------------------------
+	//---------------------------------------------------------------------
 	public void setCurveType(String curveType) {
 		for (int i = 0; i < curvesComboBox.getItemCount(); ++i) {
 			if (curveType == (String)curvesComboBox.getItemAt(i)) {
