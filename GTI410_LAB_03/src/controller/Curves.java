@@ -14,6 +14,7 @@
 */
 package controller;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
@@ -123,12 +124,39 @@ public class Curves extends AbstractTransformer implements DocObserver {
 				Shape s = (Shape)selectedObjects.get(0);
 				if (curve.getShapes().contains(s)){
 					int controlPointIndex = curve.getShapes().indexOf(s);
-					System.out.println("Try to apply G1 continuity on control point [" + controlPointIndex + "]");
-				}
+										
+					if (controlPointIndex > 0 && controlPointIndex < curve.getShapes().size() - 1) 
+					{
+						int tanPrecX = s.getCenter().x - ((Shape)curve.getShapes().get(controlPointIndex - 1)).getCenter().x;
+						int tanPrecY = s.getCenter().y - ((Shape)curve.getShapes().get(controlPointIndex - 1)).getCenter().y;
+
+						int tanSuivX = s.getCenter().x - ((Shape)curve.getShapes().get(controlPointIndex + 1)).getCenter().x;
+						int tanSuivY = s.getCenter().y - ((Shape)curve.getShapes().get(controlPointIndex + 1)).getCenter().y;
+
+						double prevDiagDistance = Math.sqrt(Math.pow(tanPrecX, 2) + Math.pow(tanPrecY, 2));
+						double nextDiagDistance = Math.sqrt(Math.pow(tanSuivX, 2) + Math.pow(tanSuivY, 2));
+
+						double distanceCoefficient = nextDiagDistance / prevDiagDistance;
+
+						int newX = s.getCenter().x + (int)(tanPrecX * distanceCoefficient);
+						int newY = s.getCenter().y + (int)(tanPrecY * distanceCoefficient);
+
+						((Shape)curve.getShapes().get(controlPointIndex + 1)).setCenter(newX, newY);
+																	
+						System.out.println("Try to apply G1 continuity on control point [" + controlPointIndex + "]");
+				}}
 			}
 			
 		}
 	}
+	
+	//http://wikicode.wikidot.com/get-angle-of-line-between-two-points
+	public static double GetAngleOfLineBetweenTwoPoints(Point p1, Point p2)
+    {
+        double xDiff = p2.x - p1.x;
+        double yDiff = p2.y - p1.y;
+        return Math.toDegrees(Math.atan2(yDiff, xDiff)) + 180;
+    }
 	
 	public void symetricControlPoint() {
 		if (curve != null) {
@@ -138,11 +166,21 @@ public class Curves extends AbstractTransformer implements DocObserver {
 				Shape s = (Shape)selectedObjects.get(0);
 				if (curve.getShapes().contains(s)){
 					int controlPointIndex = curve.getShapes().indexOf(s);
+					
+					if (controlPointIndex > 0 && controlPointIndex < curve.getShapes().size() - 1) 
+					{
+						int prevDistX = s.getCenter().x - ((Shape)curve.getShapes().get(controlPointIndex - 1)).getCenter().x;
+						int prevDistY = s.getCenter().y - ((Shape)curve.getShapes().get(controlPointIndex - 1)).getCenter().y;
+
+						((Shape)curve.getShapes().get(controlPointIndex + 1)).setCenter((s.getCenter().x + (int)(prevDistX)), 
+								(s.getCenter().y + (int)(prevDistY)));
 					System.out.println("Try to apply C1 continuity on control point [" + controlPointIndex + "]");
 				}
 			}
-			
 		}
+		}
+			
+		
 	}
 
 	public void setNumberOfSections(int n) {
@@ -172,6 +210,12 @@ public class Curves extends AbstractTransformer implements DocObserver {
 	public void docSelectionChanged() {
 		activate();
 	}
+	
+	private Point tangentePoint(Point p1, Point p2)
+	{
+		return new Point((int)(p1.getX() - p2.getX()),(int)(p1.getY() - p2.getY()));
+	}
+
 
 	private boolean firstPoint = false;
 	private Curve curve;
